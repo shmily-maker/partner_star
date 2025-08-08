@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ title }} - 我的网站{% endblock %}
+{% block title %}{{ title }} - 我的vlog{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -8,16 +8,16 @@
         <h1 class="mb-4">{{ title }}</h1>
         <p class="lead">{{ message }}</p>
         
-        <h3 class="mt-5">网站特点</h3>
+        <h3 class="mt-5">vlog特点</h3>
         <ul class="list-group">
             {% for feature in features %}
                 <li class="list-group-item">{{ feature }}</li>
             {% endfor %}
         </ul>
-        
         <div class="mt-5">
             <a href="{% url 'about' %}" class="btn btn-primary">了解更多</a>
         </div>
+
     </div>
 </div>
 {% endblock %}

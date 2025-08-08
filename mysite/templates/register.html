@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+{% block title %}注册 - 我的网站{% endblock %}
+
+{% block extra_css %}
+<style>
+    .register-container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 2rem;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 5px;
+    }
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="register-container bg-white">
+    <h2 class="text-center mb-4">用户注册</h2>
+    
+    <!-- 显示表单错误 -->
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        注册信息有误，请检查并重新提交。
+    </div>
+    {% endif %}
+
+    <!-- 注册表单 -->
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+            {{ form.username.errors }}
+            {{ form.username|add_class:"form-control"|attr:"placeholder:请输入用户名" }}
+            <small class="form-text text-muted">用户名由字母、数字和@/./+/-/_组成，最长150个字符</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+            {{ form.email.errors }}
+            {{ form.email|add_class:"form-control"|attr:"placeholder:请输入邮箱" }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}</label>
+            {{ form.password1.errors }}
+            {{ form.password1|add_class:"form-control"|attr:"placeholder:请输入密码" }}
+            <small class="form-text text-muted">密码至少8个字符，不能全是数字</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}</label>
+            {{ form.password2.errors }}
+            {{ form.password2|add_class:"form-control"|attr:"placeholder:请再次输入密码" }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary w-100">注册</button>
+    </form>
+    
+    <!-- 登录链接 -->
+    <div class="text-center mt-3">
+        已有账号？<a href="{% url 'login' %}" class="text-decoration-none">立即登录</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 表单验证
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const username = document.querySelector('input[name="username"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+        const password1 = document.querySelector('input[name="password1"]').value;
+        const password2 = document.querySelector('input[name="password2"]').value;
+        let isValid = true;
+        
+        // 简单验证
+        if (!username.trim()) {
+            alert('请输入用户名');
+            isValid = false;
+        } else if (!email.trim()) {
+            alert('请输入邮箱');
+            isValid = false;
+        } else if (password1.length < 8) {
+            alert('密码长度不能少于8个字符');
+            isValid = false;
+        } else if (password1 !== password2) {
+            alert('两次输入的密码不一致');
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

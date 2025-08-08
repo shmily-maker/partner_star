@@ -25,18 +25,20 @@ SECRET_KEY = "django-insecure-v2&^p4rgl#nj#z5odvglhv4*bbam8q9hm!=4z*y@^g1!%v8e%i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.59.200','192.168.59.201']
+# ALLOWED_PROXIES = ['192.168.59.200', '192.168.1.100']
+# 启用代理 IP 解析
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # 识别 HTTPS 协议
 # Application definition
 
 INSTALLED_APPS = [
+    "django.contrib.staticfiles",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",
     "myapp"
 ]
 
@@ -116,11 +118,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = '/static/'
+# 生产环境收集目录（保持不变）
+STATIC_ROOT = '/app/static/'
+# 项目级静态文件目录（根目录下创建 static 文件夹）
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-]
+                    BASE_DIR / 'static'
+                ]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

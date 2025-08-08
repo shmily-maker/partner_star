@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ title }} - 我的网站{% endblock %}
+{% block title %}{{ title }} - 我的vlog{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -8,7 +8,7 @@
         <h1 class="mb-4">{{ title }}</h1>
         <p class="lead">{{ content }}</p>
         
-        <h3 class="mt-5">我们的团队</h3>
+        <h3 class="mt-5">关于我的</h3>
         <div class="row row-cols-1 row-cols-md-3 g-4">
             {% for member in team %}
             <div class="col">

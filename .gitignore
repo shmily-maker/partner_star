@@ -1,0 +1,41 @@
+# Python 相关
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django 相关
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+
+# Docker 相关
+.dockerignore
+docker-compose.override.yml
+*.tar.gz
+*.dockerfile
+.env
+.env.local
+
+# 系统文件
+.DS_Store
+.idea/
+.vscode/
